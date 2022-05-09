@@ -1,0 +1,38 @@
+services:
+  server:
+    image: itzg/minecraft-server
+    environment:
+      - "EULA=TRUE"
+      - "VERSION=1.18.2"
+      - "TYPE=PAPER"
+      - "MOTD=§rya!"
+      - "DIFFICULITY=HARD"
+      - "WHITELIST_FILE=/extra/whitelist.json"
+      - "OPS_FILE=/extra/ops.json"
+      - "ICON=https://yt3.ggpht.com/ytc/AKedOLTzHrW_vO6UIjhohr87y3A3fuxOriJjKM2ugaxS=s900-c-k-c0x00ffffff-no-rj"
+      - "ENABLE_RCON=TRUE"
+      - "RCON_PASSWORD=4444"
+      - "SPAWN_PROTECTION=FALSE"
+      - "MEMORY=4G"
+      - "TUNE_VIRTUALIZED=TRUE"
+      - "TZ=Asia/Tokyo"
+      - "USE_AIKAR_FLAGS=TRUE"
+    ports:
+      - 25565:25565
+      - 25575:25575
+    restart: unless-stopped
+    stdin_open: TRUE
+    tty: TRUE
+    volumes:
+      - type: bind
+        source: ./mc_data
+        target: /data
+      - type: bind
+        source: ./plugins
+        target: /data/plugins
+      - type: bind
+        source: ./config
+        target: /data/config
+      - type: bind
+        source: ./extra
+        target: /extra
